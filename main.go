@@ -1,7 +1,15 @@
 package main
 
+import (
+	decks "golangTutorial/deck"
+)
+
+var (
+	decksVar decks.InterfaceDecks = decks.NewDecks()
+)
+
 func main() {
-	cards := newDeckFromFile("my_cards")
+	cards := decksVar.NewDeckFromFile("my_cards")
 
 	// hand, remainingCards := deal(cards, 2)
 	// hand.print()
@@ -10,6 +18,7 @@ func main() {
 
 	// cards.saveToFile("my_cards")
 
-	cards.shuffle()
-	cards.print()
+	cards.Shuffle()
+	cards.Print()
+
 }
