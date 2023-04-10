@@ -10,6 +10,12 @@ var (
 	decksVar decks.InterfaceDecks = decks.NewDecks()
 )
 
+func printMap(c map[string]string) {
+	for color, hex := range c {
+		fmt.Println("Hex code for", color, "is", hex)
+	}
+}
+
 func main() {
 	//Part 1 Cards
 	cards := decksVar.NewDeckFromFile("my_cards")
@@ -56,17 +62,19 @@ func main() {
 
 	// delete(colors, "white")
 
-	colors := map[string]string{
-		"red":   "#ff000",
-		"green": "#4bf745",
-		"white": "#fffff",
-	}
+	// colors := map[string]string{
+	// 	"red":   "#ff000",
+	// 	"green": "#4bf745",
+	// 	"white": "#fffff",
+	// }
 
-	printMap(colors)
-}
+	// printMap(colors)
 
-func printMap(c map[string]string) {
-	for color, hex := range c {
-		fmt.Println("Hex code for", color, "is", hex)
-	}
+	//Part 4 Interfaces
+
+	eb := structs.EnglishBot{}
+	sb := structs.SpanishBot{}
+
+	structs.PrintGreeting(eb)
+	structs.PrintGreeting(sb)
 }
