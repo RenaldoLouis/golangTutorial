@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	decks "golangTutorial/deck"
 	"golangTutorial/structs"
 )
@@ -38,12 +37,12 @@ func main() {
 	jim := structs.Person{
 		FirstName: "Jim",
 		LastName:  "Office",
-		Contact: structs.ContactInfo{
+		ContactInfo: structs.ContactInfo{
 			Email:   "jim@gmail.com",
 			ZipCode: 95000,
 		},
 	}
 
-	fmt.Printf("%+v", jim)
-
+	jim.UpdateName("Tommy")
+	jim.PrintString()
 }
