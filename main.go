@@ -42,7 +42,7 @@ func main() {
 			ZipCode: 95000,
 		},
 	}
-	jimPointer := &jim
-	jimPointer.UpdateName("Tommy")
+
+	jim.UpdateName("Tommy")
 	jim.PrintString()
 }
