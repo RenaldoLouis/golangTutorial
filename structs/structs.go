@@ -1,8 +1,12 @@
 package structs
 
-type Product struct {
-	Description string `json:"Description"`
-	Id          int64  `json:"Id"`
-	Name        string `json:"Name"`
-	Price       int64  `json:"Price"`
+type Person struct {
+	FirstName string `json:"FirstName"`
+	LastName  string `json:"LastName"`
+	Contact   ContactInfo
+}
+
+type ContactInfo struct {
+	Email   string `json:"Email"`
+	ZipCode int64  `json:"Zip"`
 }
