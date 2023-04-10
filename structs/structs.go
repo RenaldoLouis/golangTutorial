@@ -17,6 +17,6 @@ func (p Person) PrintString() {
 	fmt.Printf("%+v", p)
 }
 
-func (p Person) UpdateName(newFirstName string) {
+func (p *Person) UpdateName(newFirstName string) {
 	p.FirstName = newFirstName
 }
