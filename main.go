@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	decks "golangTutorial/deck"
 	"golangTutorial/structs"
 )
@@ -34,15 +35,38 @@ func main() {
 	budi.LastName = "Setiawan"
 	// fmt.Printf("%+v", budi)
 
-	jim := structs.Person{
-		FirstName: "Jim",
-		LastName:  "Office",
-		ContactInfo: structs.ContactInfo{
-			Email:   "jim@gmail.com",
-			ZipCode: 95000,
-		},
+	// jim := structs.Person{
+	// 	FirstName: "Jim",
+	// 	LastName:  "Office",
+	// 	ContactInfo: structs.ContactInfo{
+	// 		Email:   "jim@gmail.com",
+	// 		ZipCode: 95000,
+	// 	},
+	// }
+
+	// jim.UpdateName("Tommy")
+	// jim.PrintString()
+
+	//Part 3 Maps
+	// var colors map[string]string
+
+	// colors := make(map[string]string)
+
+	// colors["white"] = "#ffffff"
+
+	// delete(colors, "white")
+
+	colors := map[string]string{
+		"red":   "#ff000",
+		"green": "#4bf745",
+		"white": "#fffff",
 	}
 
-	jim.UpdateName("Tommy")
-	jim.PrintString()
+	printMap(colors)
+}
+
+func printMap(c map[string]string) {
+	for color, hex := range c {
+		fmt.Println("Hex code for", color, "is", hex)
+	}
 }
