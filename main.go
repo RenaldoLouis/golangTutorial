@@ -4,9 +4,7 @@ import (
 	"fmt"
 	decks "golangTutorial/deck"
 	"golangTutorial/structs"
-	"io"
 	"net/http"
-	"os"
 )
 
 var (
@@ -20,6 +18,14 @@ func printMap(c map[string]string) {
 }
 
 type logWriter struct{}
+
+func (logWriter) Write(bs []byte) (int, error) {
+	fmt.Println(string(bs))
+
+	fmt.Println("len", len(bs))
+
+	return len(bs), nil
+}
 
 func main() {
 	//Part 1 Cards
@@ -82,21 +88,44 @@ func main() {
 
 	// structs.PrintGreeting(eb)
 	// structs.PrintGreeting(sb)
-	resp, err := http.Get("http://google.com")
-	if err != nil {
-		fmt.Println("Error:", err)
-		os.Exit(1)
+	// resp, err := http.Get("http://google.com")
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// 	os.Exit(1)
+	// }
+
+	// lw := logWriter{}
+
+	// io.Copy(lw, resp.Body)
+
+	//Part 5 Channels
+	links := []string{
+		"http://amazon.com",
+		"http://google.com",
+		"http://facebook.com",
+		"http://golang.org",
+		"http://twitter.org",
 	}
 
-	lw := logWriter{}
+	c := make(chan string)
 
-	io.Copy(lw, resp.Body)
+	for _, link := range links {
+		go checkLink(link, c)
+	}
+
+	for i := 0; i < len(links); i++ {
+		fmt.Println(<-c)
+	}
 }
 
-func (logWriter) Write(bs []byte) (int, error) {
-	fmt.Println(string(bs))
+func checkLink(link string, c chan string) {
+	_, err := http.Get(link)
+	if err != nil {
+		fmt.Println(link, "might be down!")
+		c <- "Might be down I think"
+		return
+	}
 
-	fmt.Println("len", len(bs))
-
-	return len(bs), nil
+	fmt.Println(link, "is up!")
+	c <- "yes its up"
 }
