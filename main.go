@@ -4,6 +4,9 @@ import (
 	"fmt"
 	decks "golangTutorial/deck"
 	"golangTutorial/structs"
+	"io"
+	"net/http"
+	"os"
 )
 
 var (
@@ -15,6 +18,8 @@ func printMap(c map[string]string) {
 		fmt.Println("Hex code for", color, "is", hex)
 	}
 }
+
+type logWriter struct{}
 
 func main() {
 	//Part 1 Cards
@@ -72,9 +77,26 @@ func main() {
 
 	//Part 4 Interfaces
 
-	eb := structs.EnglishBot{}
-	sb := structs.SpanishBot{}
+	// eb := structs.EnglishBot{}
+	// sb := structs.SpanishBot{}
 
-	structs.PrintGreeting(eb)
-	structs.PrintGreeting(sb)
+	// structs.PrintGreeting(eb)
+	// structs.PrintGreeting(sb)
+	resp, err := http.Get("http://google.com")
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
+	}
+
+	lw := logWriter{}
+
+	io.Copy(lw, resp.Body)
+}
+
+func (logWriter) Write(bs []byte) (int, error) {
+	fmt.Println(string(bs))
+
+	fmt.Println("len", len(bs))
+
+	return len(bs), nil
 }

@@ -6,11 +6,9 @@ type bot interface {
 	GetGreeting() string
 }
 
-type EnglishBot struct {
-}
+type EnglishBot struct{}
 
-type SpanishBot struct {
-}
+type SpanishBot struct{}
 
 type Person struct {
 	FirstName string `json:"FirstName"`
